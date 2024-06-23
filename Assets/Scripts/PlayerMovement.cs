@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private CameraFollow cam;
     [SerializeField] Image image;
+    [SerializeField] private float collisionThreshhold;
     // Update is called once per frame
     private void Awake()
     {
@@ -28,12 +29,11 @@ public class PlayerMovement : MonoBehaviour
             currentState = PlayerState.Jumping;
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
         }
-        if(rb.velocity.y == 0) // CHANGE TO GROUND DETECTION
+        /*if(rb.velocity.y == 0) // CHANGE TO GROUND DETECTION
         {
             currentState = PlayerState.Grounded;
-        }
-
-        if(rb.position.y < cam.transform.position.y-6)
+        }*/
+        if (rb.position.y < cam.transform.position.y-6)
         {
             Death();
         }
@@ -45,7 +45,20 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
     }
-    
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<Ground>())
+        {
+            if (rb.position.y > collision.transform.position.y + 1) // i have no idea why 1 but it works
+            {
+                Debug.Log($"Collision pos: {collision.transform.position.y}");
+                currentState = PlayerState.Grounded;
+            }
+
+        }
+    }
+
+
     void Death()
     {
         currentState = PlayerState.Dying;
