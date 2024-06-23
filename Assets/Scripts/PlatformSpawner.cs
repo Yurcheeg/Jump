@@ -9,42 +9,46 @@ public class PlatformSpawner : MonoBehaviour
     public float levelWidth = 3f;
     public float minY = .2f;
     public float maxY = 1.5f;
-    public List<BoxCollider2D> boxCollider2Ds = new List<BoxCollider2D>();
 
 
+    [SerializeField] private List<BoxCollider2D> boxCollider2Ds = new List<BoxCollider2D>();
+
+    private List<GameObject> platforms;
     Vector3 spawnPosition = new();
     void Start()
     {
-        
+        platforms = new List<GameObject>();
+        spawnPosition = new Vector3();
         for(int i = 0; i < numberOfPlatforms; i++)
         {
             spawnPosition.y += Random.Range(minY, maxY);
             spawnPosition.x = Random.Range(-levelWidth, levelWidth);
-            Instantiate(platformPrefab,spawnPosition, Quaternion.identity);
+            GameObject newPlatform = Instantiate(platformPrefab,spawnPosition, Quaternion.identity);
+            platforms.Add(newPlatform);
         }
         foreach (BoxCollider2D border in boxCollider2Ds) { 
             border.size = new Vector3(levelWidth, spawnPosition.y * 100000);
         }
 
-        platformPrefab.gameObject.GetComponent<Ground>();
-        if (platformPrefab == null)
-        {
-            Debug.Log("No platform found");
-        }
-
     }
     private void Update()
     {
-        if(platformPrefab.transform.position.y < Camera.main.transform.position.y + 5)
+        for (int i = platforms.Count - 1; i >= 0; i--)
         {
-            ReplacePlatform(platformPrefab);
+            if (platforms[i].transform.position.y < Camera.main.transform.position.y - 8)
+            {
+                ReplacePlatform(platforms[i]);
+            }
         }
     }
     void ReplacePlatform(GameObject platform)
     {
-        DestroyImmediate(platform,true);
+        platforms.Remove(platform);
+        Destroy(platform);
+
         spawnPosition.y += Random.Range(minY, maxY);
         spawnPosition.x = Random.Range(-levelWidth, levelWidth);
-        Instantiate(platformPrefab, spawnPosition, Quaternion.identity);
+        GameObject newPlatform = Instantiate(platformPrefab, spawnPosition, Quaternion.identity);
+        platforms.Add(newPlatform);
     }
 }
