@@ -10,6 +10,8 @@ public class PlatformSpawner : MonoBehaviour
     public float minY = .2f;
     public float maxY = 1.5f;
 
+    public CoinSpawn coinSpawn;
+    private int platformCounter = 0;
 
     [SerializeField] private List<BoxCollider2D> boxCollider2Ds = new List<BoxCollider2D>();
 
@@ -25,9 +27,19 @@ public class PlatformSpawner : MonoBehaviour
             spawnPosition.x = Random.Range(-levelWidth, levelWidth);
             GameObject newPlatform = Instantiate(platformPrefab,spawnPosition, Quaternion.identity);
             platforms.Add(newPlatform);
+            platformCounter++;
+
+            if (platformCounter > 2)
+            {
+                if (Random.value >= 0.5)
+                {
+                    coinSpawn.CoinSpawner(spawnPosition);
+                    platformCounter = 0;
+                }
+            }
         }
         foreach (BoxCollider2D border in boxCollider2Ds) { 
-            border.size = new Vector3(levelWidth, spawnPosition.y * 100000);
+            border.size = new Vector3(levelWidth, spawnPosition.y * 1000);
         }
 
     }
@@ -40,7 +52,13 @@ public class PlatformSpawner : MonoBehaviour
                 ReplacePlatform(platforms[i]);
             }
         }
+        foreach (BoxCollider2D border in boxCollider2Ds)
+        {
+            border.transform.position = new Vector3(border.transform.position.x, Camera.main.transform.position.y);
+        }
     }
+    
+    
     void ReplacePlatform(GameObject platform)
     {
         platforms.Remove(platform);
@@ -50,5 +68,17 @@ public class PlatformSpawner : MonoBehaviour
         spawnPosition.x = Random.Range(-levelWidth, levelWidth);
         GameObject newPlatform = Instantiate(platformPrefab, spawnPosition, Quaternion.identity);
         platforms.Add(newPlatform);
+        platformCounter++;
+
+        if(platformCounter > 2)
+        {
+            if (Random.value >= 0.5)
+            {
+                coinSpawn.CoinSpawner(spawnPosition);
+                platformCounter = 0;
+            }
+        }
+
+        
     }
 }

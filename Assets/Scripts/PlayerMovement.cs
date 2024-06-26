@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private CameraFollow cam;
     [SerializeField] Image image;
     [SerializeField] private float collisionThreshhold;
+
+    [SerializeField] private CoinPickup coinPickup;
     // Update is called once per frame
     private void Awake()
     {
@@ -57,7 +59,14 @@ public class PlayerMovement : MonoBehaviour
 
         }
     }
-
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        
+        if (other.gameObject.GetComponent<Coin>())
+        {
+            coinPickup.CoinPick(other);
+        }
+    }
 
     void Death()
     {
