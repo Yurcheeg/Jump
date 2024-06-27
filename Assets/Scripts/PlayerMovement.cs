@@ -72,5 +72,6 @@ public class PlayerMovement : MonoBehaviour
     {
         currentState = PlayerState.Dying;
         image.gameObject.SetActive(true);
+        rb.gameObject.SetActive(false);
     }
 }

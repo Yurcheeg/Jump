@@ -5,9 +5,7 @@ using UnityEngine;
 
 public class CoinPickup : Coin
 {
-    public GameObject coinObject;
-    public Coin coin;   
-    public BoxCollider2D boxCollider;
+    public Coin coin;
     public void CoinPick(Collider2D collider)
     {
         Destroy(collider.gameObject);
