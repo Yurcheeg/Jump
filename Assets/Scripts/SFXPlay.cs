@@ -18,11 +18,11 @@ public class SFXPlay : MonoBehaviour
     // Update is called once per frame
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<Ground>())
+        if (collision.gameObject.GetComponent<Ground>() && rb.position.y > collision.transform.position.y + 1)
         {
-            if (rb.position.y > collision.transform.position.y + 1) // i have no idea why 1 but it works
+            if (!AudioManager.sfxMute) // i have no idea why 1 but it works
             {
-
+                
                 slimeJumpSfx.Play();
             }
 
@@ -35,7 +35,11 @@ public class SFXPlay : MonoBehaviour
         
         if(collision.gameObject.GetComponent<Coin>())
         {
-            coinPickupSfx.Play();
+            if(!AudioManager.sfxMute)
+            {
+                coinPickupSfx.Play();
+            }
+            
         }
     }
 }

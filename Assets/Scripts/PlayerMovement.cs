@@ -11,11 +11,12 @@ public class PlayerMovement : MonoBehaviour
    private float horizontal;
     [SerializeField] private float speed = 8f;
     [SerializeField] private float jumpingPower = 8f;
-    public PlayerState currentState = PlayerState.Grounded;
+    
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private CameraFollow cam;
     [SerializeField] Image image;
     [SerializeField] private float collisionThreshhold;
+    public Animator animator;
 
     [SerializeField] private CoinPickup coinPickup;
     // Update is called once per frame
@@ -26,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
+        animator.SetFloat("JumpPower",rb.velocity.y);
+        animator.SetBool("IsGrounded", currentState == PlayerState.Grounded);
         if(Input.GetButtonDown("Jump") && currentState == PlayerState.Grounded)
         {
             currentState = PlayerState.Jumping;

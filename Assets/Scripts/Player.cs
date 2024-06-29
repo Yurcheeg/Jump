@@ -11,5 +11,6 @@ public class Player : MonoBehaviour
         Jumping,
         Dying
     };
-    
+    public static PlayerState currentState = PlayerState.Grounded;
+
 }
