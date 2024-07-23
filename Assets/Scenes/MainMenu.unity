@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 186983921}
   - component: {fileID: 186983920}
   - component: {fileID: 186983919}
-  - component: {fileID: 186983918}
+  - component: {fileID: 186983922}
   m_Layer: 5
   m_Name: Options
   m_TagString: Untagged
@@ -220,18 +220,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.000045776, y: -100}
   m_SizeDelta: {x: 372.66, y: 69.88}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &186983918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 186983916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e60cadd461b9e8d4d9da9e5ebea69e5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &186983919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,19 +263,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 186983920}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1609086927}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &186983920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,6 +302,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 186983916}
   m_CullTransparentMesh: 1
+--- !u!114 &186983922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186983916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f8ec4dfac69f6d4c8bacdf82d35b597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  optionsButton: {fileID: 186983919}
 --- !u!1 &196791148
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,7 +998,6 @@ GameObject:
   - component: {fileID: 296910626}
   - component: {fileID: 296910625}
   - component: {fileID: 296910624}
-  - component: {fileID: 296910623}
   m_Layer: 5
   m_Name: ShopButton (unused)
   m_TagString: Untagged
@@ -1037,18 +1025,6 @@ RectTransform:
   m_AnchoredPosition: {x: -0.000045776, y: 95.36499}
   m_SizeDelta: {x: 372.66, y: 69.88}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &296910623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 296910621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e60cadd461b9e8d4d9da9e5ebea69e5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &296910624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1502,7 +1478,7 @@ GameObject:
   - component: {fileID: 368406545}
   - component: {fileID: 368406549}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: OptionsCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

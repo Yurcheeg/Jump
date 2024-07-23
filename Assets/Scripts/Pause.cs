@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Pause : MonoBehaviour
@@ -12,13 +13,13 @@ public class Pause : MonoBehaviour
 
     void Start()
     {
+        
         if (button != null)
         {
             button.interactable = true;
         }
-        isFrozen = false;
-        FreezeGameToggle();
         optionsMenu = FindObjectOfType<Pause>(true);
+
     }
 
     private void Update()
@@ -32,15 +33,11 @@ public class Pause : MonoBehaviour
             button.interactable = true;
         }
     }
-    public void EnableButton()
-    {
-        button.interactable = true;
-        Debug.Log($"button is interactable {button}");
-    }
+
     void FreezeGameToggle()
     {
         isFrozen = !isFrozen;
-        Time.timeScale = Convert.ToInt32(isFrozen);
+        Time.timeScale = Convert.ToInt32(!isFrozen);
         Debug.Log($"timescale: {Time.timeScale}");
         
     }
@@ -49,12 +46,19 @@ public class Pause : MonoBehaviour
         if(!optionsMenu.gameObject.activeSelf)
         {
             optionsMenu.gameObject.SetActive(true);
-            FreezeGameToggle();
+            if (SceneManager.GetActiveScene().name == "Game")
+            {
+                FreezeGameToggle();
+            }
+            
         }
     }
     public void ClosePauseMenu()
     {
         optionsMenu.gameObject.SetActive(false);
-        FreezeGameToggle();
+        if (SceneManager.GetActiveScene().name == "Game")
+        {
+            FreezeGameToggle();
+        }
     }
 }
